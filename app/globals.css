@@ -17,7 +17,17 @@
 html,
 body {
   color: #fff;
-  background-color: #0a0a0a;
+  background-color: #18181b;
   font-family: Arial, Helvetica, sans-serif;
   @apply w-full h-full;
+}
+button {
+  cursor: pointer;
+}
+.bg_image_4pugs {
+  background-image: url("./_assets/images/pugSad.png");
+  background-size: cover;
+}
+input {
+  outline: none;
 }
