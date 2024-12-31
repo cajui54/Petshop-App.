@@ -6,7 +6,7 @@ import {
   TitleComponent,
   TitlesWithLogo,
 } from "../_components/titles-with-logo";
-import FormLogin from "./_components/form-login";
+import ButtonLogin from "../_components/button-login";
 
 export default function LoginPage() {
   return (
@@ -20,8 +20,7 @@ export default function LoginPage() {
             <TitleComponent>Petshop App.</TitleComponent>
             <SubtitleComponent>Banho e Tosa</SubtitleComponent>
           </TitlesWithLogo>
-
-          <FormLogin />
+          <ButtonLogin />
           <ButtonRegisterForm />
         </div>
       </div>

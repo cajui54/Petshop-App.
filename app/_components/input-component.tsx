@@ -3,13 +3,13 @@ import React, { ElementType, ReactNode } from "react";
 interface ChildrenProps {
   children: ReactNode;
 }
-export const InputContainer = ({ children }: ChildrenProps) => {
+export const InputAsterist = () => {
   return (
-    <div className="mt-10">
-      {children}
-      <span className="relative -top-6 text-gray-500 left-3 text-2xl">*</span>
-    </div>
+    <span className="relative -top-6 text-gray-500 left-3 text-2xl">*</span>
   );
+};
+export const InputContainer = ({ children }: ChildrenProps) => {
+  return <div className="mt-10">{children}</div>;
 };
 export const LabelInput = ({ children }: ChildrenProps) => {
   return <label className="relative">{children}</label>;
@@ -28,5 +28,5 @@ export const Input = ({ children }: ChildrenProps) => {
   return <>{children}</>;
 };
 export const InfoErrorInput = ({ children }: ChildrenProps) => {
-  return <p className="text-red-600 mt-2 text-sm ml-2">{children}</p>;
+  return <p className=" text-red-600 mt-2 text-sm ml-2">{children}</p>;
 };

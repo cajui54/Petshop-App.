@@ -1,6 +1,6 @@
 "use server";
-import { signIn, auth } from "auth";
+import { signIn } from "auth";
 
-export const signInWithGoogle = async () => {
-  await signIn("google", { redirectTo: "/register" });
+export const signInWithGoogle = async (redirect: string) => {
+  await signIn("google", { redirectTo: redirect });
 };

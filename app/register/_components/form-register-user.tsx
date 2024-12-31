@@ -17,13 +17,14 @@ import { useAction } from "next-safe-action/hooks";
 import { registerUserAction } from "@/app/_actions/user/register";
 import { flattenValidationErrors } from "next-safe-action";
 import ShowPassword from "@/app/_components/show-password";
+import MessageComponent from "@/app/_components/message";
 interface FormProps {
   name: string;
   email: string;
   image: string;
   isBloqued: boolean;
 }
-interface IMessage {
+export interface IMessage {
   status: boolean;
   content: string;
   type: "success" | "error" | "";
@@ -183,17 +184,7 @@ const FormRegisterUser = (props: FormProps) => {
           </button>
         </div>
       </fieldset>
-      {message.status && (
-        <div
-          className={`${
-            message.type === "success"
-              ? "border-green-600 bg-green-200 text-green-600"
-              : "border-red-600 bg-red-200 text-red-600"
-          } mx-auto mb-5 w-4/5 rounded-lg border py-1 text-center text-xs`}
-        >
-          {message.content}
-        </div>
-      )}
+      {message.status && <MessageComponent {...message} />}
     </form>
   );
 };

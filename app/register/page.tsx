@@ -19,7 +19,7 @@ const RegisterPage = async () => {
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center">
-      <div className="w-[90%]  bg-neutral-900 rounded-lg border shadow-md shadow-pink-300 border-pink-500">
+      <div className="w-[90%] sm:w-[400px]  bg-neutral-900 rounded-lg border shadow-md shadow-pink-300 border-pink-500">
         <TitlesWithLogo>
           <IconTitleComponent>
             <IoPawOutline />
