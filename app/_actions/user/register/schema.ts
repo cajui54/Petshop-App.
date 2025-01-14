@@ -24,10 +24,12 @@ export const registerUserSchema = z.object({
     .email({ message: "Não é um email valido!" })
     .refine(async (email) => checkIfThereEmail({ email }), {
       message: "Este email já foi usado, tente outro!",
-    }),
+    })
+    .refine((email) => email.endsWith('@gmail.com'), {message: 'Apenas gmail do google é permitido!'}),
   password: z
     .string()
     .min(6, { message: "Senha de conter ao menos 6 caracteres!" }),
+  type: z.string().min(1, "tipo de usuário é obrigatório!"),
   image: z.string(),
   isBloqued: z.boolean(),
 });

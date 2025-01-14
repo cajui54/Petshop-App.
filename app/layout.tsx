@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PetShop App.",
+  title: {
+    absolute: "",
+    default: "Seja bem vindo! - Petshop App.",
+    template: "%s | Petshop App.",
+  },
   description: "Gerenciador de agendamento de petshop.",
   icons: {
     icon: ["./footDog_logo.png"],

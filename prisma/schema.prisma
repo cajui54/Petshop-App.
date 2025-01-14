@@ -18,6 +18,7 @@ model User {
   name String
   email String @unique
   password String
+  type String
   image String
   isBloqued Boolean
   createdAt DateTime @default(now())
@@ -41,6 +42,7 @@ model Service {
   id String @id @default(uuid())
   name String @unique
   price Decimal @db.Decimal(10,2)
+  image String
   createdAt    DateTime      @default(now())
   updatedAt    DateTime      @updatedAt
 }

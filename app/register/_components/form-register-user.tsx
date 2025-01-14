@@ -18,10 +18,11 @@ import { registerUserAction } from "@/app/_actions/user/register";
 import { flattenValidationErrors } from "next-safe-action";
 import ShowPassword from "@/app/_components/show-password";
 import MessageComponent from "@/app/_components/message";
-interface FormProps {
+export interface FormProps {
   name: string;
   email: string;
   image: string;
+  type: "admin" | "user";
   isBloqued: boolean;
 }
 export interface IMessage {

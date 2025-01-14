@@ -3,6 +3,7 @@ import { returnValidationErrors } from "next-safe-action";
 import { actionClient } from "@/app/_libs/safe-actions";
 import { loginSystemSchema } from "./schema";
 import { db } from "@/app/_libs/prisma";
+import { redirect } from "next/navigation";
 
 export const loginSystem = actionClient
   .schema(loginSystemSchema)
@@ -15,7 +16,8 @@ export const loginSystem = actionClient
     });
 
     if (findUser) {
-      return;
+      const pathUser = findUser.type === "admin" ? "/admin" : "/client";
+      return redirect(`/client/${findUser.id}`);
     } else {
       returnValidationErrors(loginSystemSchema, {
         _errors: ["Email ou Senha, invalido!"],

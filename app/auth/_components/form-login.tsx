@@ -67,6 +67,7 @@ const FormLogin = ({ email }: { email: string }) => {
   useEffect(() => {
     setFocus("password");
   }, []);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-4/5 mx-auto">
       <InputContainer>

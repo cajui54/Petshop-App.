@@ -20,14 +20,29 @@ body {
   background-color: #18181b;
   font-family: Arial, Helvetica, sans-serif;
   @apply w-full h-full;
+  scrollbar-color: #ec4899 #18181b;
 }
 button {
   cursor: pointer;
 }
-.bg_image_4pugs {
+.bg_image_pug_sad {
   background-image: url("./_assets/images/pugSad.png");
   background-size: cover;
 }
+.bg_image_4pugs {
+  background-image: linear-gradient(
+      to left,
+      rgba(10, 10, 10, 0.5),
+      rgba(10, 10, 10, 0.9)
+    ),
+    url("./_assets/images/4pugs.png");
+}
 input {
   outline: none;
+}
+.customScrollbar {
+  scrollbar-color: #ec4899 #18181b;
+}
+.outline-none {
+  outline-style: none;
 }

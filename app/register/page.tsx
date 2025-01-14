@@ -7,14 +7,15 @@ import {
   TitleComponent,
   TitlesWithLogo,
 } from "../_components/titles-with-logo";
-import FormRegisterUser from "./_components/form-register-user";
+import FormRegisterUser, { FormProps } from "./_components/form-register-user";
 
 const RegisterPage = async () => {
   const session = await getSessionAuth();
 
-  const data = {
+  const data: FormProps = {
     ...session,
     isBloqued: false,
+    type: "user",
   };
 
   return (

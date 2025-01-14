@@ -7,8 +7,12 @@ import {
   TitlesWithLogo,
 } from "../_components/titles-with-logo";
 import { IoPawOutline } from "react-icons/io5";
-import { getSessionEmail } from "../_data-access/get-session-email";
+import { getSessionEmail } from "../_data-access/auth-user/get-session-email";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Login User",
+};
 const AuthLoginPage = async () => {
   const email = await getSessionEmail();
 
