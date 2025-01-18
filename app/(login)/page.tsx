@@ -10,7 +10,7 @@ import ButtonLogin from "../_components/button-login";
 
 export default function LoginPage() {
   return (
-    <div className="bg_image_4pugs flex justify-center items-center w-full h-full">
+    <div className="bg-black flex justify-center items-center w-full h-full">
       <div className="w-[85%] sm:w-[400px] bg-neutral-900 rounded-lg border shadow-md shadow-pink-300 border-pink-500">
         <TitlesWithLogo>
           <IconTitleComponent>

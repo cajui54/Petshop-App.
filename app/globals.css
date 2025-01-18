@@ -36,7 +36,10 @@ button {
       rgba(10, 10, 10, 0.9)
     ),
     url("./_assets/images/4pugs.png");
+  background-repeat: repeat;
+  background-size: 50rem;
 }
+
 input {
   outline: none;
 }

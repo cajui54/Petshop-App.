@@ -1,5 +1,4 @@
 "use client";
-import MessageComponent from "@/app/_components/message";
 import { ISchedule } from "@/app/_interfaces/schedule";
 import { IService } from "@/app/_interfaces/service";
 import useManagerStorage from "@/app/_hooks/useManagerStorage";
@@ -12,11 +11,21 @@ import { PiDogFill } from "react-icons/pi";
 import { CalendaryProps } from "./schedule-manager";
 import { formatMoney } from "@/app/_utils/format-money";
 import { formatDateBr } from "@/app/_utils/format-date";
+import { addNewSchedule } from "@/app/_actions/shedule/create-schedule";
+import LoadingComponent from "@/app/_components/loading-component";
+import { IMessage } from "@/app/register/_components/form-register-user";
+import MessageComponent from "@/app/_components/message";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-const ScreenSchedule = ({ dateSchedule }: CalendaryProps) => {
+const ScreenSchedule = ({ dateSchedule, setDateSchedule }: CalendaryProps) => {
   const [schedule, setSchedule] = useState<ISchedule | null>(null);
   const { getStorageByKey } = useManagerStorage();
-
+  const [message, setMessage] = useState<IMessage>({
+    status: false,
+    content: "",
+    type: "",
+  });
+  const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
     if (getStorageByKey("services") && getStorageByKey("userId")) {
       const getServices = getStorageByKey("services");
@@ -39,14 +48,32 @@ const ScreenSchedule = ({ dateSchedule }: CalendaryProps) => {
   }, [dateSchedule]);
 
   const handleSendSchedule = () => {
-    if (schedule) {
-      if (schedule.date && schedule.time) {
-        console.log(schedule);
-
-        return;
+    try {
+      setLoading(true);
+      if (schedule) {
+        if (schedule.date && schedule.time) {
+          addNewSchedule(schedule);
+          setMessage({
+            status: true,
+            type: "success",
+            content: "Agendamento feito com sucesso!",
+          });
+          return;
+        }
       }
+    } catch (error) {
+      setMessage({
+        status: true,
+        type: "error",
+        content: `Ocorreu um erro no agendamento, ${error}`,
+      });
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+        setMessage({ status: false, type: "", content: "" });
+        setDateSchedule!({ date: null, time: undefined });
+      }, 2000);
     }
-    alert("Ocorreu um error nos dados!");
   };
   return (
     <div className="w-4/5 sm:w-[400px] mx-auto p-3 my-6 rounded-lg  bg-neutral-800">
@@ -92,21 +119,29 @@ const ScreenSchedule = ({ dateSchedule }: CalendaryProps) => {
               </span>
             </li>
           </ul>
-          <button
-            onClick={handleSendSchedule}
-            disabled={!(schedule.date && schedule.time)}
-            className={`${
-              !(schedule.date && schedule.time) && "opacity-25"
-            } w-4/5 mx-auto block p-1 mt-8 rounded-md bg-pink-500`}
-          >
-            Confirmar
-          </button>
+          {!loading ? (
+            <button
+              onClick={handleSendSchedule}
+              disabled={!(schedule.date && schedule.time)}
+              className={`${
+                !(schedule.date && schedule.time) && "opacity-25"
+              } w-4/5 mb-4 mx-auto block p-1 mt-8 rounded-md bg-pink-500`}
+            >
+              Confirmar
+            </button>
+          ) : (
+            <button
+              disabled
+              className="mb-4 w-4/5 mx-auto flex opacity-50 justify-center items-center p-1 mt-8 rounded-md bg-pink-500 "
+            >
+              <AiOutlineLoading3Quarters className="animate-spin mr-2" />
+              loading...
+            </button>
+          )}
+          {message.status && <MessageComponent {...message} />}
         </>
       ) : (
-        <MessageComponent
-          content={`Ocorreu um erro inesperado! \n ${schedule}`}
-          type="error"
-        />
+        <LoadingComponent />
       )}
     </div>
   );

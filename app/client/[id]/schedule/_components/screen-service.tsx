@@ -1,18 +1,17 @@
 "use client";
-import ButtonBackHome from "@/app/_components/button-back-home";
-import MessageComponent from "@/app/_components/message";
 import { IService } from "@/app/_interfaces/service";
 import { formatMoney } from "@/app/_utils/format-money";
 import { iconManager } from "@/app/_utils/iconManager";
 import useManagerStorage from "@/app/_hooks/useManagerStorage";
 import React from "react";
+import LoadingComponent from "@/app/_components/loading-component";
 
 const ScreenService = () => {
   const { getStorageByKey } = useManagerStorage();
   const services: IService[] | null = getStorageByKey("services");
 
   return (
-    <div className="w-[95%] sm:w-[400px] py-1 h-52 mx-auto my-6 bg-neutral-800 rounded-lg">
+    <div className="w-[95%] sm:w-[400px] py-1 mx-auto my-6 bg-neutral-800 rounded-lg">
       <h2 className="my-4 w-4/5 mx-auto text-2xl font-semibold tracking-wide">
         Serviços solicitados:
       </h2>
@@ -34,11 +33,7 @@ const ScreenService = () => {
         </div>
       ) : (
         <div className="h-4/5 flex justify-center flex-col items-center">
-          <MessageComponent
-            type="error"
-            content="Ocorreu erro ao carregar sessionStorage!"
-          />
-          <ButtonBackHome />
+          <LoadingComponent />
         </div>
       )}
     </div>

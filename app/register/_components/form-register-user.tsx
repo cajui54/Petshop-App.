@@ -4,8 +4,6 @@ import React, { useState, useEffect } from "react";
 import { PiUserFocus } from "react-icons/pi";
 import { LiaPawSolid } from "react-icons/lia";
 import { MdOutlineCancel } from "react-icons/md";
-import { LuEyeClosed } from "react-icons/lu";
-import { ImEye } from "react-icons/im";
 import { useForm, SubmitHandler } from "react-hook-form";
 import {
   registerUserSchema,
@@ -71,10 +69,7 @@ const FormRegisterUser = (props: FormProps) => {
   };
   const onSubmit: SubmitHandler<RegisterUserSchema> = (data) => {
     executeRegiterUser(data);
-
-    setTimeout(() => {
-      setMessage({ status: false, content: "", type: "" });
-    }, 3000);
+    setMessage({ status: false, content: "", type: "" });
     reset();
   };
   useEffect(() => {
@@ -168,10 +163,10 @@ const FormRegisterUser = (props: FormProps) => {
             className=" bg-pink-600"
             type="submit"
           >
-            {!isSubmitting ? (
-              <LiaPawSolid className="text-2xl mr-2" />
-            ) : (
+            {isSubmitting ? (
               <FaArrowRotateRight className="animate-spin text-2xl mr-2" />
+            ) : (
+              <LiaPawSolid className="text-2xl mr-2" />
             )}
             Cadastrar
           </button>

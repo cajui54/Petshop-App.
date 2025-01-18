@@ -9,7 +9,7 @@ import ScreenSchedule from "./screen-schedule";
 
 export interface DateSchedule {
   date: string | null;
-  time?: string;
+  time?: string | undefined;
 }
 export interface CalendaryProps {
   dateSchedule?: DateSchedule;
@@ -28,15 +28,23 @@ const ScheduleManager = () => {
         subtile="Dias e Horários disponíveis"
       />
 
-      <div className="lg:flex lg:justify-center lg:items-center ">
+      <div className="lg:flex lg:justify-center lg:items-center lg:w-[90%] mx-auto">
         <CalendarySchedule setDateSchedule={setDateSchedule} />
 
         {dateSchedule.date && (
           <Suspense fallback={<SkeletonItem />}>
-            <ScheduleTime setDateSchedule={setDateSchedule} />
+            <ScheduleTime
+              setDateSchedule={setDateSchedule}
+              dateSchedule={dateSchedule}
+            />
           </Suspense>
         )}
-        {dateSchedule && <ScreenSchedule dateSchedule={dateSchedule} />}
+        {dateSchedule.time && (
+          <ScreenSchedule
+            dateSchedule={dateSchedule}
+            setDateSchedule={setDateSchedule}
+          />
+        )}
       </div>
     </div>
   );

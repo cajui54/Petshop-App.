@@ -1,3 +1,4 @@
+"use client";
 import React, { useMemo, useState } from "react";
 import { months } from "@/app/_utils/calendary";
 import { CalendaryProps } from "./schedule-manager";
@@ -5,9 +6,11 @@ import { CalendaryProps } from "./schedule-manager";
 const CalendarySchedule = ({ setDateSchedule }: CalendaryProps) => {
   const date = new Date();
   const [monthIndex, setMonthIndex] = useState<number>(date.getMonth());
+  const [selectDay, setSelectDay] = useState<string>("");
   const monthsDate = useMemo(() => months, []);
 
   const handleDateTime = (day: number, _month: number) => {
+    setSelectDay(day.toString());
     const _date = `${date.getFullYear()}/${day}/${_month + 1}`;
     setDateSchedule!({ date: _date });
   };
@@ -23,8 +26,10 @@ const CalendarySchedule = ({ setDateSchedule }: CalendaryProps) => {
             <span
               key={index}
               className={`${
-                day === date.getDate() && "!bg-pink-600 !text-white"
-              } cursor-pointer hover:scale-125 hover:text-pink-500 hover:transition-color hover:ease-in-out hover:font-bold p-1 rounded-lg`}
+                day === date.getDate() && "!bg-neutral-900 !text-white"
+              } cursor-pointer ${
+                selectDay === day.toString() && "!bg-pink-600"
+              } hover:scale-125 hover:text-pink-500 hover:transition-color hover:ease-in-out hover:font-bold p-1 rounded-lg`}
               onClick={() => handleDateTime(day, monthsDate[monthIndex].number)}
             >
               {day}

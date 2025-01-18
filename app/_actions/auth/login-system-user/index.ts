@@ -17,7 +17,8 @@ export const loginSystem = actionClient
 
     if (findUser) {
       const pathUser = findUser.type === "admin" ? "/admin" : "/client";
-      return redirect(`/client/${findUser.id}`);
+
+      return redirect(`${pathUser}/${findUser.id}`);
     } else {
       returnValidationErrors(loginSystemSchema, {
         _errors: ["Email ou Senha, invalido!"],
