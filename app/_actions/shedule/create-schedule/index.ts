@@ -19,6 +19,6 @@ export const addNewSchedule = async (schedule: ISchedule) => {
   } catch (error) {
     alert(`Ocorreu um erro inesperado! ${error}`);
   } finally {
-    revalidatePath("client/:id/schedule");
+    revalidatePath("/", "layout");
   }
 };
