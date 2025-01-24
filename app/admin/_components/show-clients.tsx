@@ -63,7 +63,7 @@ const ShowClients = ({ date }: ShowClientsProps) => {
       className={`customScrollbar py-2 w-full sm:w-[600px] h-[500px] bg-neutral-950 mx-auto my-8 rounded-2xl overflow-auto`}
     >
       {datas.length > 0 ? (
-        [...datas, ...datas].map((client, index) => (
+        datas.map((client, index) => (
           <div
             key={client.id}
             className={`${
