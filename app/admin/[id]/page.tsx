@@ -1,9 +1,10 @@
 import React from "react";
+import ListClient from "../_components/list-main";
 
 const AdminPage = () => {
   return (
     <div>
-      <h3>AdminPage</h3>
+      <ListClient />
     </div>
   );
 };

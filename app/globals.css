@@ -49,3 +49,21 @@ input {
 .outline-none {
   outline-style: none;
 }
+
+.clientList li {
+  @apply bg-neutral-950 px-3 py-2 rounded-md mb-1 flex justify-between items-center;
+}
+.clientList li span:first-child {
+  @apply text-[13px] flex justify-center items-center;
+}
+.clientList li span:last-child {
+  @apply font-semibold;
+}
+.clientList button:hover {
+  transition: all 0.5s ease-in-out;
+  transform: scale(1.2);
+}
+.flexRowsCenter {
+  display: flex;
+  align-items: center;
+}

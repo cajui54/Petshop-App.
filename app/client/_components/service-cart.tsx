@@ -12,17 +12,19 @@ interface ServiceCartProps {
 }
 
 const ServiceCart = ({ cartBuy, setCartBuy }: ServiceCartProps) => {
-  const { saveInStorage } = useManagerStorage();
+  const { saveInStorage, getStorageByKey } = useManagerStorage();
   const [callRedirect, setCallRedirect] = useState(false);
 
   const handleCartBuy = () => {
     saveInStorage({ key: "services", value: cartBuy });
+
     setCallRedirect(true);
   };
   useEffect(() => {
     const handleNextPage = () => {
       setCallRedirect(false);
-      redirect("/client/41759b20-70ea-46d3-92ec-295fc6fa3c11/schedule");
+      const userId: string = getStorageByKey("userId");
+      redirect(`/client/${userId}/schedule`);
     };
     callRedirect && handleNextPage();
   }, [callRedirect]);
@@ -84,7 +86,6 @@ const ServiceCart = ({ cartBuy, setCartBuy }: ServiceCartProps) => {
         className={`${
           cartBuy.length > 0 ? "opacity-100" : "opacity-55"
         } bg-pink-400 my-2 rounded-lg py-1 w-4/5 mx-auto block`}
-        //disabled={cartBuy.length === 0}
         onClick={handleCartBuy}
       >
         Confirmar

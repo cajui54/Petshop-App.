@@ -10,7 +10,7 @@ import {
 import { getUser } from "@/app/_data-access/user/get-user";
 import { Metadata } from "next";
 
-interface LayoutProps {
+export interface LayoutProps {
   params: { id: string };
   children: React.ReactNode;
 }

@@ -68,11 +68,9 @@ const ScreenSchedule = ({ dateSchedule, setDateSchedule }: CalendaryProps) => {
         content: `Ocorreu um erro no agendamento, ${error}`,
       });
     } finally {
-      setTimeout(() => {
-        setLoading(false);
-        setMessage({ status: false, type: "", content: "" });
-        setDateSchedule!({ date: null, time: undefined });
-      }, 2000);
+      setLoading(false);
+      setMessage({ status: false, type: "", content: "" });
+      setDateSchedule!({ date: null, time: undefined });
     }
   };
   return (

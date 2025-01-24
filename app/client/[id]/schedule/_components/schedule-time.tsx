@@ -4,7 +4,8 @@ import { CalendaryProps } from "./schedule-manager";
 import { getTimes } from "@/app/_data-access/time/get-times";
 import { Time } from "@prisma/client";
 import LoadingComponent from "@/app/_components/loading-component";
-import { formatDateBr } from "@/app/_utils/format-date";
+import { formatDateBr, getDateToday } from "@/app/_utils/format-date";
+import { IoWarningSharp } from "react-icons/io5";
 
 const ScheduleTime = ({ setDateSchedule, dateSchedule }: CalendaryProps) => {
   const date = new Date();
@@ -26,7 +27,25 @@ const ScheduleTime = ({ setDateSchedule, dateSchedule }: CalendaryProps) => {
       const _date = formatDateBr(newDate);
 
       const _times = await getTimes(_date);
-      setTimes(_times);
+
+      const filter = _times.filter((timeValue) => {
+        const hour = Number(timeValue.time.split(":").join(""));
+        const TimeSystem = Number(`${date.getHours()}${date.getMinutes()}`);
+        const dataCalendary =
+          dateSchedule?.date && formatDateBr(dateSchedule?.date);
+
+        if (dataCalendary) {
+          if (dataCalendary === getDateToday()) {
+            if (hour > TimeSystem) {
+              return timeValue;
+            }
+          } else {
+            return timeValue;
+          }
+        }
+      });
+
+      setTimes(filter);
     };
     requestTimes();
   }, [dateSchedule?.date]);
@@ -64,9 +83,13 @@ const ScheduleTime = ({ setDateSchedule, dateSchedule }: CalendaryProps) => {
               </select>
             </>
           ) : (
-            <div className="text-center">
+            <div className="text-center w-full">
+              <p className="text-1xl font-black flex justify-center items-center">
+                <IoWarningSharp className="text-yellow-500 mr-2 text-2xl animate-pulse" />
+                No momento
+              </p>
               <p className="text-[10px]">
-                No momento não há horários diponíveis nessa data.
+                não há horários disponíveis nessa data.
               </p>
               <p>Tente outra data diferente!</p>
             </div>

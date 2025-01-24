@@ -3,7 +3,7 @@ Deploy of App [PetShop App.](https://petshop-app-flax.vercel.app/)
 ## Petshop App.
 
 À Petshop App é uma aplicação web, para gerenciar agendamentos e serviços de um petshop,
-na aplicação é possível o cliente se registrar com uma conta do google, fazer o login, escolher serviços e datas.\*\*\*\*
+na aplicação é possível o cliente se registrar com uma conta do google, fazer o login, escolher serviços e datas.
 
 ### Tecnologias usadas
 
@@ -17,5 +17,3 @@ na aplicação é possível o cliente se registrar com uma conta do google, faze
 - Typescript
 - React Icons
 - PostgreSQL
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
