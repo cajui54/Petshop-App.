@@ -15,10 +15,9 @@ export const addNewSchedule = async (schedule: ISchedule) => {
         time: schedule.time,
       };
       await db.schedule.create({ data: newSchedule });
+      revalidatePath("/", "layout");
     }
   } catch (error) {
     alert(`Ocorreu um erro inesperado! ${error}`);
-  } finally {
-    revalidatePath("/", "layout");
   }
 };

@@ -7,7 +7,13 @@ declare global {
 }
 
 const createPrismaClient = () => {
-  return new PrismaClient();
+  return new PrismaClient({
+    omit: {
+      user: {
+        password: true,
+      },
+    },
+  });
 };
 
 let prisma: ReturnType<typeof createPrismaClient>;

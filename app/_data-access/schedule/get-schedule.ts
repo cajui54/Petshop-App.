@@ -7,7 +7,6 @@ interface User {
   updatedAt: Date;
   name: string;
   email: string;
-  password: string;
   type: string;
   isBloqued: boolean;
 }
@@ -33,6 +32,7 @@ const getScheduleDto = async (date: string): Promise<ScheduleDto[] | []> => {
     ...client,
     price: Number(client.price),
   }));
+
   return filterClient;
 };
 

@@ -58,7 +58,6 @@ const ScreenSchedule = ({ dateSchedule, setDateSchedule }: CalendaryProps) => {
             type: "success",
             content: "Agendamento feito com sucesso!",
           });
-          return;
         }
       }
     } catch (error) {
@@ -68,9 +67,11 @@ const ScreenSchedule = ({ dateSchedule, setDateSchedule }: CalendaryProps) => {
         content: `Ocorreu um erro no agendamento, ${error}`,
       });
     } finally {
-      setLoading(false);
-      setMessage({ status: false, type: "", content: "" });
-      setDateSchedule!({ date: null, time: undefined });
+      setTimeout(() => {
+        setLoading(false);
+        setMessage({ status: false, type: "", content: "" });
+        setDateSchedule!({ date: null, time: undefined });
+      }, 2000);
     }
   };
   return (

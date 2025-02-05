@@ -4,7 +4,7 @@ import { CalendaryProps } from "./schedule-manager";
 import { getTimes } from "@/app/_data-access/time/get-times";
 import { Time } from "@prisma/client";
 import LoadingComponent from "@/app/_components/loading-component";
-import { formatDateBr, getDateToday } from "@/app/_utils/format-date";
+import { convertTimeToNumber, formatDateBr } from "@/app/_utils/format-date";
 import { IoWarningSharp } from "react-icons/io5";
 
 const ScheduleTime = ({ setDateSchedule, dateSchedule }: CalendaryProps) => {
@@ -28,64 +28,52 @@ const ScheduleTime = ({ setDateSchedule, dateSchedule }: CalendaryProps) => {
 
       const _times = await getTimes(_date);
 
-      const filter = _times.filter((timeValue) => {
-        const hour = Number(timeValue.time.split(":").join(""));
-        const TimeSystem = Number(`${date.getHours()}${date.getMinutes()}`);
-        const dataCalendary =
-          dateSchedule?.date && formatDateBr(dateSchedule?.date);
-
-        if (dataCalendary) {
-          if (dataCalendary === getDateToday()) {
-            if (hour > TimeSystem) {
-              return timeValue;
-            }
-          } else {
-            return timeValue;
-          }
-        }
-      });
-
-      setTimes(filter);
+      setTimes(_times);
     };
     requestTimes();
   }, [dateSchedule?.date]);
 
   return (
-    <div className="w-4/5 relative lg:ml-0 sm:w-[400px] mx-auto p-3 bg-neutral-800 rounded-lg">
+    <div className="relative mx-auto w-4/5 rounded-lg bg-neutral-800 p-3 sm:w-[400px] lg:ml-0">
       <button
         onClick={() => setDateSchedule!({ date: null, time: undefined })}
-        className="absolute -right-3 -top-5 bg-red-600 p-1 px-2 text-center rounded-full"
+        className="absolute -right-3 -top-5 rounded-full bg-red-600 p-1 px-2 text-center"
       >
         X
       </button>
       <p className="text-sm font-bold tracking-wider">
         Confira os horários disponíveis abaixo:
       </p>
-      <label className="w-4/5 my-7 h-20 mx-auto rounded-lg relative bg-neutral-700 p-3 flex justify-center items-center">
+      <label className="relative mx-auto my-7 flex h-20 w-4/5 items-center justify-center rounded-lg bg-neutral-700 p-3">
         <Suspense fallback={<LoadingComponent />}>
           {times.length > 0 ? (
             <>
-              <span className="absolute text-[12px] top-4 left-14">
+              <span className="absolute left-14 top-4 text-[12px]">
                 Selecione um horário
               </span>
               <select
-                className="w-4/5 text-sm py-3 tracking-wide	mx-auto text-center bg-neutral-900 font-extrabold outline-none cursor-pointer rounded-full border border-pink-500"
+                className="mx-auto w-4/5 cursor-pointer rounded-full border border-pink-500 bg-neutral-900 py-3 text-center text-sm font-extrabold tracking-wide outline-none"
                 onChange={handleChange}
               >
                 <option value="default" className="text-[2px]">
                   -
                 </option>
-                {times.map(({ time, id }) => (
-                  <option value={time} key={id}>
-                    {time}
-                  </option>
-                ))}
+                {times
+                  .sort(
+                    (a, b) =>
+                      convertTimeToNumber(a.time) - convertTimeToNumber(b.time),
+                  )
+                  .map(({ time, id }) => (
+                    <option value={time} key={id}>
+                      {time}
+                    </option>
+                  ))}
               </select>
             </>
           ) : (
-            <div className="text-center w-full">
-              <p className="text-1xl font-black flex justify-center items-center">
-                <IoWarningSharp className="text-yellow-500 mr-2 text-2xl animate-pulse" />
+            <div className="w-full text-center">
+              <p className="text-1xl flex items-center justify-center font-black">
+                <IoWarningSharp className="mr-2 animate-pulse text-2xl text-yellow-500" />
                 No momento
               </p>
               <p className="text-[10px]">
