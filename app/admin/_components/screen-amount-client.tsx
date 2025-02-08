@@ -22,7 +22,7 @@ const ScreenAmountClient = () => {
     const requestAmountClient = async () => {
       try {
         setIsLoading(true);
-        const date = await getTotalClient();
+        const date = await getTotalClient(calendary.date);
         setScheduleManager(date);
       } catch (error) {
         alert(`Ocorreu um erro inesperado! ${error}`);
@@ -31,15 +31,15 @@ const ScreenAmountClient = () => {
       }
     };
     requestAmountClient();
-  }, []);
+  }, [calendary.date]);
 
   return (
-    <div className="mx-auto mt-8 flex min-h-40 w-[94%] flex-col items-center rounded-md bg-neutral-950 py-2 sm:w-[600px]">
+    <div className="mx-auto mt-8 flex min-h-40 w-[94%] flex-col items-center rounded-md py-2 sm:w-[600px]">
       {!isLoadind ? (
-        <ul className="mx-auto w-4/5 [&>*]:mt-3 [&>*]:flex [&>*]:justify-between [&>*]:rounded-lg [&>*]:bg-neutral-800 [&>*]:px-4 [&>*]:py-3">
-          <li>
+        <ul className="mx-auto grid h-[200px] w-4/5 [&>*]:mt-3 [&>*]:flex [&>*]:justify-between [&>*]:rounded-lg [&>*]:bg-neutral-800 [&>*]:px-4 [&>*]:py-3">
+          <li className="border border-pink-500">
             <span className="flex items-center">
-              <FaPeopleGroup className="mr-3 block rounded-full bg-pink-400 p-1 text-3xl" />
+              <FaPeopleGroup className="mr-3 block rounded-full bg-pink-400 p-1 text-4xl" />
               Clientes marcados:
             </span>
             <span className="text-2xl font-bold text-pink-400">
@@ -47,9 +47,9 @@ const ScreenAmountClient = () => {
             </span>
           </li>
 
-          <li>
+          <li className="border border-pink-500">
             <span className="flex items-center">
-              <LuTimerReset className="mr-3 block rounded-full bg-pink-400 p-1 text-3xl" />
+              <LuTimerReset className="mr-3 block rounded-full bg-pink-400 p-1 text-4xl" />
               Horários disponíveis:
             </span>
             <span className="text-2xl font-bold text-pink-400">
@@ -57,9 +57,9 @@ const ScreenAmountClient = () => {
             </span>
           </li>
 
-          <li>
+          <li className="border border-pink-500">
             <span className="flex items-center">
-              <GiPlayerTime className="mr-3 block rounded-full bg-pink-400 p-1 text-3xl" />
+              <GiPlayerTime className="mr-3 block rounded-full bg-pink-400 p-1 text-4xl" />
               Capacidade Total:
             </span>
             <span className="text-2xl font-bold text-pink-400">

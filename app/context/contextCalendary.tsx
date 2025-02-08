@@ -2,8 +2,10 @@
 import {
   createContext,
   Dispatch,
+  MutableRefObject,
   ReactNode,
   SetStateAction,
+  useRef,
   useState,
 } from "react";
 import { getDateToday } from "../_utils/format-date";
@@ -18,12 +20,15 @@ interface IChdildren {
   children: ReactNode;
 }
 const intialeContext: ContextCalendary = {
-  calendary: { date: getDateToday() },
+  calendary: {
+    date: getDateToday(),
+  },
 };
 export const ContextCalenday = createContext<ContextCalendary>(intialeContext);
 
 export const ContextCalendayProvider = ({ children }: IChdildren) => {
   const [calendary, setDate] = useState<Date>({ date: getDateToday() });
+
   return (
     <ContextCalenday.Provider value={{ calendary, setDate }}>
       {children}

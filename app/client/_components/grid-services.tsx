@@ -12,7 +12,7 @@ const GridServices = async ({ id }: { id: string }) => {
   });
 
   return (
-    <div className="w-[95%] mt-28 m-auto p-2 h-80">
+    <div className="m-auto mt-6 h-80 w-[95%] p-2">
       <TitlesContainer
         title="Preços e Serviços"
         subtile="Selecione um ou mais serviço"

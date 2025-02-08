@@ -3,6 +3,7 @@ import imgDog from "@/app/_assets/images/dog-pug.png";
 import React from "react";
 import GridServices from "../_components/grid-services";
 import { Metadata } from "next";
+import BookingComponent from "@/app/_components/booking";
 
 export const metadata: Metadata = {
   title: "Agendamento",
@@ -17,8 +18,9 @@ const heroData: HeroProps = {
 };
 const ClientPage = ({ params }: PropsParam) => {
   return (
-    <div className="w-full h-full">
+    <div className="h-full w-full">
       <HeroComponent {...heroData} />
+      <BookingComponent />
       <GridServices id={params.id} />
     </div>
   );

@@ -1,14 +1,11 @@
 "use client";
 import { months } from "@/app/_utils/calendary";
-import {
-  addZeroNumber,
-  formatDateBr,
-  getDateToday,
-} from "@/app/_utils/format-date";
-import React, { Suspense, useState } from "react";
+import { addZeroNumber, getDateToday } from "@/app/_utils/format-date";
+import React, { Suspense, use, useContext, useEffect, useState } from "react";
 import ShowClients from "./show-clients";
 import SkeletonItem from "@/app/client/_components/skeleton-item";
 import { MdArrowLeft, MdArrowRight } from "react-icons/md";
+import { ContextCalenday } from "@/app/context/contextCalendary";
 
 export interface ManagerDate {
   month: string;
@@ -17,6 +14,7 @@ export interface ManagerDate {
 }
 
 const ListManager = () => {
+  const { setDate } = useContext(ContextCalenday);
   const dateSystem = new Date();
   const [indexMonth, setIndexMonth] = useState<number>(dateSystem.getMonth());
   const [dateManager, setDateManager] = useState<ManagerDate>({
@@ -86,6 +84,10 @@ const ListManager = () => {
       }
     }
   };
+
+  useEffect(() => {
+    setDate?.({ date: dateManager.dateFull });
+  }, [dateManager.dateFull]);
   return (
     <div>
       <div className="mt-11">

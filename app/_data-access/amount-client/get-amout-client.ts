@@ -8,11 +8,12 @@ export interface AmountClient {
   totalClient: number;
 }
 
-export const getTotalClient = async (): Promise<AmountClient> => {
+export const getTotalClient = async (date: string): Promise<AmountClient> => {
   const timesTotal = await db.time.count();
   const timeSchedule = await db.schedule.count({
-    where: { date: getDateToday() },
+    where: { date },
   });
+  console.log(date);
 
   return {
     amountSchedule: timeSchedule,
