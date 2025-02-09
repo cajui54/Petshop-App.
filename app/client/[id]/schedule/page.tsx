@@ -5,7 +5,7 @@ import ScheduleManager from "./_components/schedule-manager";
 
 const ScheduleClientPage = () => {
   return (
-    <div className="w-full pb-3">
+    <div className="h-full w-full pb-3">
       <Suspense fallback={<SkeletonItem />}>
         <ScreenService />
       </Suspense>

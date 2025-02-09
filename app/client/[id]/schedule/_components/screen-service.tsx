@@ -11,31 +11,35 @@ const ScreenService = () => {
   const services: IService[] | null = getStorageByKey("services");
 
   return (
-    <div className="w-[95%] sm:w-[400px] py-1 mx-auto my-6 bg-neutral-800 rounded-lg">
-      <h2 className="my-4 w-4/5 mx-auto text-2xl font-semibold tracking-wide">
-        Serviços solicitados:
-      </h2>
-      {services ? (
-        <div>
-          {services.map((service) => {
-            const Icon = iconManager(service.name).icon;
-            return (
-              <div
-                key={service.id}
-                className="bg-neutral-950 w-4/5 py-2 mx-auto rounded-lg mb-3 border border-pink-600 flex justify-around items-center"
-              >
-                <Icon className="text-3xl text-pink-600" />
-                <span className="text-neutral-200 text-xl">{service.name}</span>
-                <span>{formatMoney(service.price)}</span>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="h-4/5 flex justify-center flex-col items-center">
-          <LoadingComponent />
-        </div>
-      )}
+    <div className="mx-auto my-6 w-[95%] overflow-hidden rounded-lg bg-neutral-800 sm:w-[400px]">
+      <div className="h-full">
+        <h2 className="mx-auto my-4 w-4/5 text-2xl font-semibold tracking-wide">
+          Serviços solicitados:
+        </h2>
+        {services ? (
+          <div>
+            {services.map((service) => {
+              const Icon = iconManager(service.name).icon;
+              return (
+                <div
+                  key={service.id}
+                  className="mx-auto mb-3 flex w-4/5 items-center justify-around rounded-lg border border-pink-600 bg-neutral-950 py-2"
+                >
+                  <Icon className="text-3xl text-pink-600" />
+                  <span className="text-xl text-neutral-200">
+                    {service.name}
+                  </span>
+                  <span>{formatMoney(service.price)}</span>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex h-4/5 flex-col items-center justify-center">
+            <LoadingComponent />
+          </div>
+        )}
+      </div>
     </div>
   );
 };

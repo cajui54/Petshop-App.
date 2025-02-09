@@ -60,3 +60,9 @@ export const months = [
     days: Array.from({ length: 31 }, (_, i) => i + 1),
   },
 ];
+
+export const getMonthName = (month: number) => {
+  const findMonth = months.find((_month) => _month.number === month);
+
+  return findMonth ? findMonth.month : "Ops! ;(";
+};
