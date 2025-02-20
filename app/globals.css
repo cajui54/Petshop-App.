@@ -67,3 +67,11 @@ input {
   display: flex;
   align-items: center;
 }
+.gradientBg {
+  background: linear-gradient(
+    to top,
+    #171717,
+    rgb(23, 23, 23, 0.3),
+    rgb(23, 23, 23, 0.3)
+  );
+}
