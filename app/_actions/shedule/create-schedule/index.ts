@@ -14,8 +14,18 @@ export const addNewSchedule = async (schedule: ISchedule) => {
         date: formatDateBr(schedule.date),
         time: schedule.time,
       };
-      await db.schedule.create({ data: newSchedule });
-      revalidatePath("/", "layout");
+      const checkDate = await db.schedule.findMany({
+        where: { date: newSchedule.date },
+      });
+      const getTimes = checkDate.map((data) => data.time);
+
+      if (!getTimes.includes(newSchedule.time)) {
+        await db.schedule.create({ data: newSchedule });
+
+        revalidatePath("/", "layout");
+      } else {
+        alert("Esse horário já foi marcado!");
+      }
     }
   } catch (error) {
     alert(`Ocorreu um erro inesperado! ${error}`);
