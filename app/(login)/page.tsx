@@ -13,7 +13,7 @@ import Image from "next/image";
 export default function LoginPage() {
   return (
     <div className="flex h-full w-full items-center justify-center bg-black">
-      <div className="w-[85%] rounded-lg border border-pink-500 bg-neutral-900 shadow-md shadow-pink-300 sm:w-[400px]">
+      <div className="w-[95%] rounded-lg bg-neutral-900 sm:w-[400px]">
         <div className="relative mx-auto mt-1 h-[200px] w-[99%] overflow-hidden">
           <div className="gradientBg absolute z-10 h-full w-full"></div>
           <Image
