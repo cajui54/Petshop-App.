@@ -91,7 +91,6 @@ const ShowClients = ({ date }: ShowClientsProps) => {
 
   const handleFinish = (index: number) => {
     const timeNow = getTimeNow();
-    console.log("xxx");
 
     const findIndex = scheduleManager.map((schedule) => {
       if (schedule.index === index) {
@@ -169,9 +168,13 @@ const ShowClients = ({ date }: ShowClientsProps) => {
                   </div>
 
                   <div className="flex-grow">
-                    <h2 className="mb-1 text-xl font-semibold tracking-wider text-white">
-                      {client.user.name}
-                    </h2>
+                    <div className="flex items-center justify-between pr-5">
+                      <h2 className="mb-1 text-xl font-semibold tracking-wider text-white">
+                        {client.user.name}
+                      </h2>
+
+                      <p className="text-2xl text-pink-500">{client.service}</p>
+                    </div>
                     <ul className="clientList pr-2">
                       <li>
                         <span>

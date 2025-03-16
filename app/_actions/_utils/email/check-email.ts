@@ -9,7 +9,6 @@ export const checkIfThereEmail = async ({
   let findEmail;
   try {
     findEmail = await db.user.findUnique({ where: { email } });
-    console.log(findEmail);
   } catch (error) {
     alert("Ocorreu um erro inesperado");
   } finally {

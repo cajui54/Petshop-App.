@@ -34,7 +34,7 @@ const FormLogin = ({ email }: { email: string }) => {
   const { execute: executeLoginSystem } = useAction(loginSystem, {
     onError: ({ error: { validationErrors } }) => {
       const flatternedErrors = flattenValidationErrors(validationErrors);
-      console.log(flatternedErrors.formErrors[0]);
+
       setMessage({
         status: true,
         type: "error",
@@ -69,7 +69,7 @@ const FormLogin = ({ email }: { email: string }) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-4/5 mx-auto">
+    <form onSubmit={handleSubmit(onSubmit)} className="mx-auto w-4/5">
       <InputContainer>
         <LabelInput>
           <SpanInput>email</SpanInput>
@@ -77,7 +77,7 @@ const FormLogin = ({ email }: { email: string }) => {
 
           <Input>
             <input
-              className="focus:border-pink-500 bg-neutral-800 placeholder:text-lg text-gray-300 focus:bg-neutral-700 font-extralight  text-2xl tracking-wide   py-5 w-[90%] border pl-9 border-neutral-400 rounded-lg"
+              className="w-[90%] rounded-lg border border-neutral-400 bg-neutral-800 py-5 pl-9 text-2xl font-extralight tracking-wide text-gray-300 placeholder:text-lg focus:border-pink-500 focus:bg-neutral-700"
               type="email"
               {...register("email", { required: true })}
               placeholder="example@gmail.com"
@@ -97,7 +97,7 @@ const FormLogin = ({ email }: { email: string }) => {
 
           <Input>
             <input
-              className="focus:border-pink-500  bg-neutral-800 placeholder:text-lg text-gray-300 focus:bg-neutral-700 font-extralight  text-2xl tracking-wide   py-5 w-[90%] border pl-9 border-neutral-400 rounded-lg"
+              className="w-[90%] rounded-lg border border-neutral-400 bg-neutral-800 py-5 pl-9 text-2xl font-extralight tracking-wide text-gray-300 placeholder:text-lg focus:border-pink-500 focus:bg-neutral-700"
               type={!showPassword ? "password" : "text"}
               {...register("password", { required: true })}
               placeholder="* * * * * *"
@@ -115,17 +115,17 @@ const FormLogin = ({ email }: { email: string }) => {
       </InputContainer>
 
       <ButtonsContainer>
-        <button disabled={isSubmitting} type="submit" className=" bg-pink-600">
+        <button disabled={isSubmitting} type="submit" className="bg-pink-600">
           {isSubmitting ? (
             <div className="flex">
-              <BsArrowRepeat className="text-2xl mr-2 animate-spin" />
+              <BsArrowRepeat className="mr-2 animate-spin text-2xl" />
               <span>Carregando...</span>
             </div>
           ) : (
             <span>Entrar</span>
           )}
         </button>
-        <button type="reset" className="bg-neutral-800 mt-4">
+        <button type="reset" className="mt-4 bg-neutral-800">
           Cancelar
         </button>
       </ButtonsContainer>

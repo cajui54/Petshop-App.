@@ -4,6 +4,7 @@ import { db } from "@/app/_libs/prisma";
 import { formatDateBr } from "@/app/_utils/format-date";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { actionClient } from "@/app/_libs/safe-actions";
 
 export const addNewSchedule = async (schedule: ISchedule) => {
   try {
@@ -23,8 +24,6 @@ export const addNewSchedule = async (schedule: ISchedule) => {
         await db.schedule.create({ data: newSchedule });
 
         revalidatePath("/", "layout");
-      } else {
-        alert("Esse horário já foi marcado!");
       }
     }
   } catch (error) {

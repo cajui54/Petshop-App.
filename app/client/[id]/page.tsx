@@ -23,10 +23,12 @@ const ClientPage = async ({ params }: PropsParam) => {
   return (
     <div className="h-full w-full">
       <HeroComponent {...heroData} />
-      <div className="mx-auto mb-24 mt-16 h-[230px] w-full overflow-y-auto sm:w-[500px]">
-        <h2 className="ml-4 mt-4">Meus Agendamentos</h2>
-        {bookings.length > 0 && <BookingComponent bookings={bookings} />}
-      </div>
+      {bookings.length > 0 && (
+        <div className="mx-auto mb-24 mt-16 h-[230px] w-full overflow-y-auto sm:w-[500px]">
+          <h2 className="ml-4 mt-4">Meus Agendamentos</h2>
+          <BookingComponent bookings={bookings} />
+        </div>
+      )}
 
       <GridServices id={params.id} />
     </div>
